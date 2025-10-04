@@ -1,10 +1,46 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Environment-dependent path to Maven home directory
-/mavenHomeManager.xml
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
+# IntelliJ IDEA / JetBrains
+.idea/
+*.iml
+*.iws
+out/
+classes/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configs (IDE-specific)
+workspace.xml
+shelf/
+httpRequests/
+dataSources/
+dataSources.local.xml
+mavenHomeManager.xml
+
+# Build/coverage tools
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# Coverage / reports
+jacoco.exec
+*.hprof
