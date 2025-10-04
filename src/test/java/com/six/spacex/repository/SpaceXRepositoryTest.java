@@ -1,9 +1,7 @@
-package com.six.spacex;
+package com.six.spacex.repository;
 
 import com.six.spacex.domain.*;
 import com.six.spacex.dto.MissionSummary;
-import com.six.spacex.repository.InMemorySpaceXRepository;
-import com.six.spacex.repository.SpaceXRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
