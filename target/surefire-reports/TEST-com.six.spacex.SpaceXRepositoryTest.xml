@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.six.spacex.SpaceXRepositoryTest" time="0.038" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.six.spacex.SpaceXRepositoryTest" time="0.042" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PL"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire/surefirebooter-20251004144425298_3.jar /Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire 2025-10-04T14-44-25_259-jvmRun1 surefire-20251004144425298_1tmp surefire_0-20251004144425298_2tmp"/>
+    <property name="sun.java.command" value="/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire/surefirebooter-20251004150752593_3.jar /Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire 2025-10-04T15-07-52_542-jvmRun1 surefire-20251004150752593_1tmp surefire_0-20251004150752593_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/test-classes:/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/classes:/Users/faxriafrasiyab/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/faxriafrasiyab/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/faxriafrasiyab/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/faxriafrasiyab/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/faxriafrasiyab/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/faxriafrasiyab/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -28,16 +28,14 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire/surefirebooter-20251004144425298_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/faxriafrasiyab/Documents/spacex-dragon-repo/target/surefire/surefirebooter-20251004150752593_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25"/>
     <property name="user.name" value="faxriafrasiyab"/>
-    <property name="org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener" value="warn"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="path.separator" value=":"/>
     <property name="os.version" value="15.6.1"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="jdk.module.illegalAccess.silent" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="skipTests" value="false"/>
@@ -56,18 +54,17 @@
     <property name="java.vendor" value="Homebrew"/>
     <property name="java.vm.version" value="25"/>
     <property name="stdin.encoding" value="UTF-8"/>
-    <property name="jdk.internal.httpclient.debug" value="false"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="changeRocketStatus_toInRepair_makesMissionPending" classname="com.six.spacex.SpaceXRepositoryTest" time="0.019"/>
+  <testcase name="changeRocketStatus_toInRepair_makesMissionPending" classname="com.six.spacex.SpaceXRepositoryTest" time="0.023"/>
   <testcase name="addRocket_defaultsToOnGround" classname="com.six.spacex.SpaceXRepositoryTest" time="0.0"/>
   <testcase name="cannotSetInSpaceWithoutMission" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
   <testcase name="cannotAssignToEndedMission" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
   <testcase name="addMission_defaultsToScheduled" classname="com.six.spacex.SpaceXRepositoryTest" time="0.0"/>
   <testcase name="cannotAssignRocketTwice" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
-  <testcase name="assignRocket_toMission_and_autoStatusRecalc" classname="com.six.spacex.SpaceXRepositoryTest" time="0.0"/>
-  <testcase name="summary_ordersByDragonCountDesc_thenNameDesc" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
+  <testcase name="assignRocket_toMission_and_autoStatusRecalc" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
+  <testcase name="summary_ordersByDragonCountDesc_thenNameDesc" classname="com.six.spacex.SpaceXRepositoryTest" time="0.002"/>
   <testcase name="cannotSetInBuildWhenAssigned" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
-  <testcase name="cannotEndMissionWithAssignedRockets" classname="com.six.spacex.SpaceXRepositoryTest" time="0.001"/>
+  <testcase name="cannotEndMissionWithAssignedRockets" classname="com.six.spacex.SpaceXRepositoryTest" time="0.0"/>
 </testsuite>
