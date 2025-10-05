@@ -42,3 +42,54 @@ Transit - In progress - Dragons: 2
 Luna1 - Pending - Dragons: 2
    o Dragon 1 - In space
    o Dragon 2 - In repair
+
+
+🧱 Project Structure
+
+com.six.spacex
+├── domain
+│   ├── Mission.java
+│   ├── MissionId.java
+│   ├── MissionStatus.java
+│   ├── Rocket.java
+│   ├── RocketId.java
+│   ├── RocketStatus.java
+│   └── DomainException.java
+│
+├── dto
+│   ├── MissionSummary.java
+│   └── RocketDetails.java
+│
+├── repository
+│   ├── SpaceXRepository.java
+│   └── InMemorySpaceXRepository.java
+│
+├── util
+│   └── MissionSummaryPrinter.java
+│
+└── DemoApplication.java
+
+
+🧪 Tests
+
+All functionality is covered with JUnit 5 tests.
+
+Test Class	Purpose
+SpaceXRepositoryTest	Core features and rule validation.
+SpaceXRepositoryExtraTest	Query APIs, unassigning, and printer formatting.
+Run tests
+mvn -q test
+
+✅ Requirements Coverage
+| PDF Requirement             | Implementation                                   | Test                                                                                  |
+| --------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| Add new rocket (On ground)  | `Rocket`, `InMemorySpaceXRepository.addRocket`   | `addRocket_defaultsToOnGround`                                                        |
+| Assign rocket (one mission) | `assignRocketToMission`                          | `cannotAssignRocketTwice`                                                             |
+| Change rocket status        | `changeRocketStatus`                             | `cannotSetInSpaceWithoutMission`, `changeRocketStatus_toInRepair_makesMissionPending` |
+| Add new mission (Scheduled) | `Mission`, `addMission`                          | `addMission_defaultsToScheduled`                                                      |
+| Assign multiple rockets     | `assignRocketsToMission`                         | `summary_ordersByDragonCountDesc_thenNameDesc`                                        |
+| Change mission status       | `changeMissionStatus`, auto-status recalculation | `cannotEndMissionWithAssignedRockets`, `autoStatusRecalc`                             |
+| Get summary (sorted)        | `summarizeMissionsByAssignedRockets`             | `summary_ordersByDragonCountDesc_thenNameDesc`                                        |
+| Mission/Rocket constraints  | Validations in repository                        | All rule-based tests                                                                  |
+| Pretty output               | `MissionSummaryPrinter`                          | `missionSummaryPrinter_formatsLikeExample`                                            |
+
