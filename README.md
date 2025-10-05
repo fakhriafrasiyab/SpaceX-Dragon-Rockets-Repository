@@ -33,7 +33,10 @@ It supports **adding, assigning, updating statuses**, and **summarizing mission 
 
 ```bash
 mvn -q compile exec:java -Dexec.mainClass="com.six.spacex.DemoApplication"
-Sample Output:
+```
+
+**Sample Output:**
+```
 ===== SpaceX Dragon Missions Summary =====
 Transit - In progress - Dragons: 2
   o Red Dragon - On ground
@@ -42,9 +45,12 @@ Transit - In progress - Dragons: 2
 Lunal - Pending - Dragons: 2
   o Dragon 1 - In space
   o Dragon 2 - In repair
+```
+---
 
+## 🗂️ Project Structure
 
-🗂️ Project Structure
+```
 com.six.spacex
  ├── domain
  │   ├── Mission.java
@@ -71,3 +77,42 @@ com.six.spacex
  └── test
      ├── SpaceXRepositoryTest.java
      └── SpaceXRepositoryExtraTest.java
+```
+
+---
+
+## ✅ Tests
+
+All functionality is covered with **JUnit 5 tests**.
+
+- `SpaceXRepositoryTest` → Core features and rule validation  
+- `SpaceXRepositoryExtraTest` → Query APIs, unassigning logic, and printer formatting  
+
+Run all tests:
+```bash
+mvn test -q
+```
+
+---
+
+## 📋 Requirements Coverage
+
+| PDF Requirement | Implementation | Test |
+|-----------------|----------------|------|
+| **Add new rocket (On ground)** | `Rocket`, `InMemorySpaceXRepository.addRocket` | `addRocket_defaultsToOnGround` |
+| **Assign rocket (one mission)** | `assignRocketToMission` | `cannotAssignRocketTwice` |
+| **Change rocket status** | `changeRocketStatus` | `cannotSetInSpaceWithoutMission`, `changeRocketStatus_toInRepair_makesMissionPending` |
+| **Add new mission (Scheduled)** | `Mission`, `addMission` | `addMission_defaultsToScheduled` |
+| **Assign multiple rockets** | `assignRocketsToMission` | `summary_ordersByDragonCountDesc_thenNameDesc` |
+| **Change mission status (auto)** | `changeMissionStatus`, auto-status recalculation | `cannotEndMissionWithAssignedRockets`, `autoStatusRecalc` |
+| **Get summary** | `MissionSummaryPrinter`, `MissionSummary` | `summary_ordersByDragonCountDesc_thenNameDesc` |
+
+---
+
+## 🧩 Notes
+
+- This is a **library**, not a REST API.
+- The in-memory store can be replaced later with a database or external storage.
+- Designed to demonstrate **domain modeling**, **clean architecture**, and **unit test coverage**.
+
+---
