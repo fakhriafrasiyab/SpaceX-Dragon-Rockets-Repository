@@ -1,59 +1,90 @@
-# SpaceX Dragon Rockets Repository (library)
+🚀 SpaceX Dragon Rockets Repository
 
-A simple **in-memory library** that manages SpaceX dragons (rockets) and missions.
+A simple Java library (not REST API or microservice) that manages SpaceX Dragon rockets and missions using an in-memory store.
+Built with clean code, SOLID principles, and test-driven development.
 
-> Exercise highlights: No frameworks, TDD, SOLID, clean code, and clear commit history.
-> This README records assumptions and decisions.
+📘 Overview
 
-## Requirements Mapping (recap)
+The library tracks rockets and missions, their statuses, and relationships.
+It supports adding, assigning, updating statuses, and summarizing mission data.
 
-**Operations**:
-1. Add rocket (default status: `On ground`)
-2. Assign rocket to mission (a rocket can be in **one** mission at a time)
-3. Change rocket status (statuses below)
-4. Add mission (default status: `Scheduled`)
-5. Assign **multiple** rockets to a mission
-6. Change mission status
-7. Mission summary sorted by number of assigned rockets (desc), then mission name (Z→A).
+⚙️ Features
+Functionality	Description
+Add rocket	Creates a rocket with initial status On ground.
+Add mission	Creates a mission with initial status Scheduled.
+Assign rocket	Assigns a rocket to a mission (one rocket → one mission).
+Change statuses	Rocket: On ground, In space, In repair, In build.
+Mission: Scheduled, Pending, In progress, Ended.
+Auto mission status	Automatically recalculates based on assigned rockets.
+Summary report	Returns missions sorted by number of rockets (desc) and name (desc).
+Query API	Fetch missions or rockets by ID or status.
+Unassign rocket	Removes a rocket from a mission and updates statuses.
+🧩 Example Usage
+Run the demo:
+mvn -q compile exec:java -Dexec.mainClass="com.six.spacex.DemoApplication"
 
-**Statuses**
-- Rocket: `On ground`, `In space`, `In repair`, `In build`
-- Mission: `Scheduled`, `Pending`, `In Progress`, `Ended`
+Example output:
+===== SpaceX Dragon Missions Summary =====
+Transit - In progress - Dragons: 2
+   o Red Dragon - On ground
+   o Dragon XL - In space
 
-## Assumptions & Clarifications
+Luna1 - Pending - Dragons: 2
+   o Dragon 1 - In space
+   o Dragon 2 - In repair
 
-Some statements in the prompt conflict with the example. To keep behavior practical and match the example:
-- **Assigned rocket with `On ground`** is allowed (example shows a mission listing a rocket *On ground*). So `On ground` does **not** strictly imply “unassigned”; it’s simply “not in space.”
-- `In space` rockets **must be assigned** to a mission (disallowed otherwise).
-- Changing a rocket to `In build` is allowed only when **not assigned**.
-- Mission status is **automatically recalculated** whenever assignments or rocket statuses change **unless** the mission is `Ended`.
-  - `Scheduled` ⇢ zero assigned rockets
-  - `Pending` ⇢ ≥1 assigned **and** at least one rocket is `In repair`
-  - `In Progress` ⇢ ≥1 assigned **and** none are `In repair`
-  - `Ended` ⇢ explicit terminal status; **forbidden** if any rocket is assigned; also **no further assignments** allowed.
-- Assigning to an `Ended` mission is forbidden.
-- Assigning a rocket that is already assigned is forbidden.
-- **Bulk assignment** is atomic: either all succeed or none.
+🧱 Project Structure
+com.six.spacex
+├── domain
+│   ├── Mission.java
+│   ├── MissionId.java
+│   ├── MissionStatus.java
+│   ├── Rocket.java
+│   ├── RocketId.java
+│   ├── RocketStatus.java
+│   └── DomainException.java
+│
+├── dto
+│   ├── MissionSummary.java
+│   └── RocketDetails.java
+│
+├── repository
+│   ├── SpaceXRepository.java
+│   └── InMemorySpaceXRepository.java
+│
+├── util
+│   └── MissionSummaryPrinter.java
+│
+└── DemoApplication.java
 
-No persistence: **all in memory**.
+🧪 Tests
 
-## Public API (high level)
+All functionality is covered with JUnit 5 tests.
 
-```java
-SpaceXRepository repo = new InMemorySpaceXRepository();
-RocketId r1 = repo.addRocket("Dragon XL");
-MissionId m1 = repo.addMission("Transit");
-repo.assignRocketToMission(r1, m1);
-repo.changeRocketStatus(r1, RocketStatus.IN_SPACE);
-List<MissionSummary> summary = repo.summarizeMissionsByAssignedRockets();
-```
+Test Class	Purpose
+SpaceXRepositoryTest	Core features and rule validation
+SpaceXRepositoryExtraTest	Query APIs, unassigning, and printer formatting
 
-## Build & Test
+Run tests:
 
-```bash
-mvn -q -e -DskipTests=false test
-```
+mvn -q test
 
-## AI usage
+✅ Requirements Coverage
+PDF Requirement	Implementation	Test
+Add new rocket (On ground)	Rocket, InMemorySpaceXRepository.addRocket	addRocket_defaultsToOnGround
+Assign rocket (one mission)	assignRocketToMission	cannotAssignRocketTwice
+Change rocket status	changeRocketStatus	cannotSetInSpaceWithoutMission, changeRocketStatus_toInRepair_makesMissionPending
+Add new mission (Scheduled)	Mission, addMission	addMission_defaultsToScheduled
+Assign multiple rockets	assignRocketsToMission	summary_ordersByDragonCountDesc_thenNameDesc
+Change mission status	changeMissionStatus, auto-status recalculation	cannotEndMissionWithAssignedRockets, autoStatusRecalc
+Get summary (sorted)	summarizeMissionsByAssignedRockets	summary_ordersByDragonCountDesc_thenNameDesc
+Mission/Rocket constraints	Validations in repository	All rule-based tests
+Pretty output	MissionSummaryPrinter	missionSummaryPrinter_formatsLikeExample
 
-Parts of the initial project scaffolding and tests were drafted with help from an AI assistant to speed up repetitive setup. Design choices, domain rules, and code were reviewed and adjusted by me.
+All requirements are satisfied and verified through automated tests.
+
+🧰 Build
+
+Requires Java 17+ and Maven 3.9+.
+
+mvn clean package
