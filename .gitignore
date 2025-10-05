@@ -26,7 +26,7 @@ target/
 Thumbs.db
 
 # Local configs (IDE-specific)
-workspace.xml
+.idea/workspace.xml
 shelf/
 httpRequests/
 dataSources/
